@@ -129,14 +129,13 @@ export default {
       } else {
         this.loading = true
         const res = await login(this.username, this.password)
-        console.log('res', res)
         this.loading = false
         if (res.status === 200) {
           const user = res.data
-          if (user.role === 'admin') {
+          if (user.role === 'manager') {
             this.$store.commit('authStore/login', {
               user,
-              token: res.token,
+              token: user.token,
             })
             this.$router.replace({ path: '/' })
           } else {

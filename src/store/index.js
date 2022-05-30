@@ -23,7 +23,7 @@ const authStore = {
     },
     login(state, req) {
       const { user, token } = req
-      if (user.role === 'admin') {
+      if (user.role === 'manager') {
         state.isAuthenticated = true
         state.user = { ...user }
         state.token = token

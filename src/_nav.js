@@ -11,135 +11,123 @@ export default [
   },
   {
     component: 'CNavTitle',
-    name: 'Notification',
+    name: 'TEAM',
+  },
+  {
+    component: 'CNavItem',
+    name: 'Nhân viên',
+    to: '/manager',
+    icon: 'cil-user',
+  },
+  // {
+  //   component: 'CNavTitle',
+  //   name: 'Report',
+  // },
+  // {
+  //   component: 'CNavItem',
+  //   name: 'Advertisment',
+  //   to: '/report/advertisment',
+  //   icon: 'cil-drop',
+  // },
+  // {
+  //   component: 'CNavItem',
+  //   name: 'Promotion',
+  //   to: '/report/promotion',
+  //   icon: 'cil-pencil',
+  // },
+  // {
+  //   component: 'CNavItem',
+  //   name: 'Revenue',
+  //   to: '/report/revenue',
+  //   icon: 'cil-notes',
+  // },
+  // {
+  //   component: 'CNavItem',
+  //   name: 'Store',
+  //   to: '/report/store',
+  //   icon: 'cil-cursor',
+  // },
+  {
+    component: 'CNavTitle',
+    name: 'Quản lý công việc',
   },
   {
     component: 'CNavGroup',
-    name: 'Orders',
-    to: '/orders',
-    icon: 'cil-bell',
+    name: 'Quản lý tiến độ',
+    to: '/manager/task',
+    icon: 'cil-notes',
     items: [
       {
         component: 'CNavItem',
-        name: 'List Orders',
-        to: '/orders/list',
+        name: 'Danh sách công việc',
+        to: '/manager/task/list',
+      },
+      {
+        component: 'CNavItem',
+        name: 'Thêm mới công việc',
+        to: '/manager/task/create',
       },
     ],
   },
   {
-    component: 'CNavTitle',
-    name: 'Report',
-  },
-  {
-    component: 'CNavItem',
-    name: 'Advertisment',
-    to: '/report/advertisment',
-    icon: 'cil-drop',
-  },
-  {
-    component: 'CNavItem',
-    name: 'Promotion',
-    to: '/report/promotion',
-    icon: 'cil-pencil',
-  },
-  {
-    component: 'CNavItem',
-    name: 'Revenue',
-    to: '/report/revenue',
-    icon: 'cil-notes',
-  },
-  {
-    component: 'CNavItem',
-    name: 'Store',
-    to: '/report/store',
-    icon: 'cil-cursor',
-  },
-  {
-    component: 'CNavTitle',
-    name: 'Management',
-  },
-  {
     component: 'CNavGroup',
-    name: 'Product',
-    to: '/products',
+    name: 'Quản lý KPI',
+    to: '/manager/kpi',
     icon: 'cil-puzzle',
     items: [
       {
         component: 'CNavItem',
-        name: 'List Product',
-        to: '/products/list',
-      },
-      {
-        component: 'CNavItem',
-        name: 'Create new product',
-        to: '/products/create',
-      },
-      {
-        component: 'CNavItem',
-        name: 'Categories',
-        to: '/products/categories/',
-      },
-    ],
-  },
-  {
-    component: 'CNavGroup',
-    name: 'Account',
-    to: '/users',
-    icon: 'cil-user',
-    items: [
-      {
-        component: 'CNavItem',
-        name: 'Customers',
+        name: 'Danh sách KPI',
         to: '/users/customers',
       },
-      {
-        component: 'CNavItem',
-        name: 'Accounts',
-        to: '/users/accounts',
-      },
-      {
-        component: 'CNavItem',
-        name: 'Create new account',
-        to: '/users/create',
-      },
+      // {
+      //   component: 'CNavItem',
+      //   name: 'Accounts',
+      //   to: '/users/accounts',
+      // },
+      // {
+      //   component: 'CNavItem',
+      //   name: 'Create new account',
+      //   to: '/users/create',
+      // },
     ],
   },
-  {
-    component: 'CNavGroup',
-    name: 'Promotions',
-    to: '/promotions',
-    icon: 'cil-calculator',
-    items: [
-      {
-        component: 'CNavItem',
-        name: 'List Promotions',
-        to: '/promotions/list',
-      },
-      {
-        component: 'CNavItem',
-        name: 'Create new account',
-        to: '/promotions/create',
-      },
-    ],
-  },
-  {
-    component: 'CNavGroup',
-    name: 'Advertisements',
-    to: '/advertisements',
-    icon: 'cil-star',
-    items: [
-      {
-        component: 'CNavItem',
-        name: 'List Advertisements',
-        to: '/advertisements/list',
-      },
-      {
-        component: 'CNavItem',
-        name: 'Create new advertisement',
-        to: '/advertisements/create',
-      },
-    ],
-  },
+  // {
+  //   component: 'CNavGroup',
+  //   name: 'Promotions',
+  //   to: '/promotions',
+  //   icon: 'cil-calculator',
+  //   items: [
+  //     {
+  //       component: 'CNavItem',
+  //       name: 'List Promotions',
+  //       to: '/promotions/list',
+  //     },
+  //     {
+  //       component: 'CNavItem',
+  //       name: 'Create new account',
+  //       to: '/promotions/create',
+  //     },
+  //   ],
+  // },
+  // {
+  //   component: 'CNavGroup',
+  //   name: 'Advertisements',
+  //   to: '/advertisements',
+  //   icon: 'cil-star',
+  //   items: [
+  //     {
+  //       component: 'CNavItem',
+  //       name: 'List Advertisements',
+  //       to: '/advertisements/list',
+  //     },
+  //     {
+  //       component: 'CNavItem',
+  //       name: 'Create new advertisement',
+  //       to: '/advertisements/create',
+  //     },
+  //   ],
+  // },
   // {
   //   component: 'CNavGroup',
   //   name: 'Store',

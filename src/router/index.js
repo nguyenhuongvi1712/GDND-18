@@ -20,6 +20,26 @@ const routes = [
           import(/* webpackChunkName: "dashboard" */ '@/views/Dashboard.vue'),
       },
       {
+        path: '/manager',
+        name: 'Quản lý',
+        redirect: '/manager/users',
+      },
+      {
+        path: '/manager/users',
+        name: 'Danh sách nhân viên',
+        component: () => import('@/views/manager/UserList.vue'),
+      },
+      {
+        path: '/manager/task/list',
+        name: 'Danh sách công việc',
+        component: () => import('@/views/manager/task/TaskList.vue'),
+      },
+      {
+        path: '/manager/task/create',
+        name: 'Tạo mới công việc',
+        component: () => import('@/views/manager/task/CreateNewTask.vue'),
+      },
+      {
         path: '/report',
         name: 'Report',
         redirect: '/report/advertisment',
