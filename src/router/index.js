@@ -40,6 +40,11 @@ const routes = [
         component: () => import('@/views/manager/task/CreateNewTask.vue'),
       },
       {
+        path: '/manager/task/:id',
+        name: 'Chi tiết công việc',
+        component: () => import('@/views/manager/task/TaskDetail.vue'),
+      },
+      {
         path: '/report',
         name: 'Report',
         redirect: '/report/advertisment',

@@ -5,6 +5,11 @@
   </h1>
   <el-table :data="tableData" stripe style="width: 100%">
     <el-table-column prop="name" label="Nội dung công việc" width="500">
+      <template v-slot="scope">
+        <a class="link-custom" @click="onHandleRedirect(scope.row.id)">{{
+          scope.row.name
+        }}</a>
+      </template>
     </el-table-column>
     <el-table-column prop="progress" label="Tiến độ (%)" sortable>
     </el-table-column>
@@ -80,6 +85,9 @@ export default {
       var page_form = (currentPage - 1) * this.limit
       this.tableData = this.taskList.slice(page_form, page_form + this.limit)
     },
+    onHandleRedirect(id) {
+      this.$router.push(`/manager/task/${id}`)
+    },
   },
 }
 </script>
@@ -89,6 +97,10 @@ export default {
 }
 .pagination-custom {
   margin-top: 10px;
+}
+.link-custom {
+  color: var(--cui-link-color, #321fdb);
+  text-decoration: underline;
 }
 h1 {
   text-align: center;
