@@ -13,12 +13,20 @@ export default [
     component: 'CNavTitle',
     name: 'TEAM',
   },
+  // {
+  //   component: 'CNavItem',
+  //   name: 'Nhân viên',
+  //   to: '/manager',
+  //   icon: 'cil-user',
+  // },
+
   {
     component: 'CNavItem',
-    name: 'Nhân viên',
-    to: '/manager',
+    name: 'Theo dõi ngày công',
+    to: '/accountant',
     icon: 'cil-user',
   },
+
   // {
   //   component: 'CNavTitle',
   //   name: 'Report',
@@ -49,36 +57,41 @@ export default [
   // },
   {
     component: 'CNavTitle',
-    name: 'Quản lý công việc',
+    name: 'Quản lý báo cáo',
   },
   {
     component: 'CNavGroup',
-    name: 'Quản lý tiến độ',
-    to: '/manager/task',
+    name: 'Báo cáo lương',
+    to: '/accountant/salary',
     icon: 'cil-notes',
     items: [
       {
         component: 'CNavItem',
-        name: 'Danh sách công việc',
-        to: '/manager/task/list',
+        name: 'Lương nhân viên',
+        to: '/accountant/salary/staff',
       },
       {
         component: 'CNavItem',
-        name: 'Thêm mới công việc',
-        to: '/manager/task/create',
+        name: 'Lương cán bộ',
+        to: '/accountant/salary/manager',
       },
     ],
   },
   {
     component: 'CNavGroup',
-    name: 'Quản lý KPI',
-    to: '/manager/kpi',
+    name: 'Báo cáo tài chính',
+    to: '/accountant',
     icon: 'cil-puzzle',
     items: [
       {
         component: 'CNavItem',
-        name: 'Danh sách KPI',
-        to: '/users/customers',
+        name: 'Báo cáo thu chi',
+        to: '/accountant/cost',
+      },
+      {
+        component: 'CNavItem',
+        name: 'Báo cáo chi phí phát sinh',
+        to: '/accountant/incurred',
       },
       // {
       //   component: 'CNavItem',

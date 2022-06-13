@@ -138,6 +138,12 @@ export default {
               token: user.token,
             })
             this.$router.replace({ path: '/' })
+          } else if (user.role === 'accountant') {
+            this.$store.commit('authStore/login', {
+              user,
+              token: user.token,
+            })
+            this.$router.replace({ path: '/' })
           } else {
             this.$message.error("Oops, you don't have permission!")
           }

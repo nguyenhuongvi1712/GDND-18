@@ -29,6 +29,17 @@ const MANAGER_MOCK = [
     team: 'T1 quận Ba Đình',
   },
 ]
+
+const ACCOUNTANT_MOCK = [
+  {
+    username: 'accountant1',
+    password: '123456',
+    role: 'accountant',
+    token: '1234567891',
+    team: 'T2 quận Ba Đình',
+  },
+]
+
 export async function login(username, password) {
   // const res = await getModule()
   // if (res === 14) {
@@ -37,7 +48,17 @@ export async function login(username, password) {
   // } else {
   //   return await login_08(username, password)
   // }
-  var account_check = MANAGER_MOCK.find(
+  var account_check = ACCOUNTANT_MOCK.find(
+    (e) => e.username === username && e.password === password,
+  )
+  if (account_check) {
+    return {
+      status: 200,
+      data: account_check,
+    }
+  }
+
+  account_check = MANAGER_MOCK.find(
     (e) => e.username === username && e.password === password,
   )
   if (account_check) {

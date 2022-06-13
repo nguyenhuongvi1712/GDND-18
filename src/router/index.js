@@ -44,6 +44,38 @@ const routes = [
         name: 'Chi tiết công việc',
         component: () => import('@/views/manager/task/TaskDetail.vue'),
       },
+      // accountant
+      {
+        path: '/accountant',
+        name: 'Kế toán',
+        redirect: '/accountant/tracking',
+      },
+      {
+        path: '/accountant/tracking',
+        name: 'Theo dõi ngày công',
+        component: () => import('@/views/accountant/WorkDayTracking.vue'),
+      },
+      {
+        path: '/accountant/salary/staff',
+        name: 'Lương nhân viên',
+        component: () => import('@/views/accountant/salary/Staff.vue'),
+      },
+      {
+        path: '/accountant/salary/manager',
+        name: 'Lương cán bộ',
+        component: () => import('@/views/accountant/salary/Manager.vue'),
+      },
+      {
+        path: '/accountant/cost',
+        name: 'Báo cáo thu chi',
+        component: () => import('@/views/accountant/Cost.vue'),
+      },
+      {
+        path: '/accountant/incurred',
+        name: 'Chi phí phát sinh',
+        component: () => import('@/views/accountant/Incurred.vue'),
+      },
+      // end accountant
       {
         path: '/report',
         name: 'Report',
