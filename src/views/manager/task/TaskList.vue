@@ -3,6 +3,7 @@
     Danh sách công việc đội
     <span class="uppercase-text">{{ account.team }}</span>
   </h1>
+
   <el-table :data="tableData" stripe style="width: 100%">
     <el-table-column prop="name" label="Nội dung công việc" width="500">
       <template v-slot="scope">
@@ -34,6 +35,13 @@
           :type="checkRenderStatus(scope.row.status)"
           disable-transitions
           >{{ renderStatus(scope.row.status) }}</el-tag
+        >
+      </template>
+    </el-table-column>
+    <el-table-column label="Operations">
+      <template v-slot="scope">
+        <el-button size="mini" @click="handleEdit(scope.$index, scope.row)"
+          >Cập nhật</el-button
         >
       </template>
     </el-table-column>

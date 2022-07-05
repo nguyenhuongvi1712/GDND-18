@@ -6,7 +6,7 @@ const TASK_DETAIL_MOCK = [
   {
     id: faker.datatype.uuid(),
     name: 'Dọn cỏ',
-    progress: 10,
+    progress: 20,
     assign: [
       {
         name: 'Nguyễn Văn A',
@@ -19,7 +19,7 @@ const TASK_DETAIL_MOCK = [
   {
     id: faker.datatype.uuid(),
     name: 'Cải tạo đất trồng',
-    progress: 50,
+    progress: 40,
     assign: [
       {
         name: 'Nguyễn Văn A',
@@ -42,7 +42,7 @@ const TASK_DETAIL_MOCK = [
   {
     id: faker.datatype.uuid(),
     name: 'Trồng hoa',
-    progress: 30,
+    progress: 40,
     assign: [
       {
         name: 'Nguyễn Văn A',
@@ -74,11 +74,6 @@ const TASK_DETAIL_MOCK = [
       },
       {
         name: 'Nguyễn Văn C',
-        id: faker.datatype.uuid(),
-        avatar: faker.image.avatar(),
-      },
-      {
-        name: 'Nguyễn Văn D',
         id: faker.datatype.uuid(),
         avatar: faker.image.avatar(),
       },

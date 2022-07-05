@@ -10,7 +10,7 @@ export default {
   computed: {
     defaultData() {
       return {
-        labels: ['VueJs', 'EmberJs', 'VueJs', 'AngularJs'],
+        labels: ['Đã hoàn thành', 'Đang tiến hành', 'Đang chờ', 'Đã hủy'],
         datasets: [
           {
             backgroundColor: ['#41B883', '#E46651', '#00D8FF', '#DD1B16'],
