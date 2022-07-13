@@ -77,7 +77,16 @@
           </div>
           <hr />
           <div>
-            <el-button class="view-btn" type="success" size="small"
+            <el-button
+              class="view-btn"
+              type="success"
+              size="small"
+              @click="
+                () => {
+                  modalUpdateTask = true
+                  task_focus = task_index
+                }
+              "
               >Update</el-button
             >
             <el-button
@@ -143,22 +152,22 @@
     <CModalBody>
       <el-form
         label-width="100px"
-        :model="formLabelAlign"
+        :model="formAddNewTask"
         label-position="left"
       >
         <el-form-item label="Tên công việc">
-          <el-input v-model="formLabelAlign.name"></el-input>
+          <el-input v-model="formAddNewTask.name"></el-input>
         </el-form-item>
         <el-form-item label="Nội dung cụ thể">
           <el-input
-            v-model="formLabelAlign.description"
+            v-model="formAddNewTask.description"
             type="textarea"
             rows="5"
           ></el-input>
         </el-form-item>
         <el-form-item label="Ngày bắt đầu">
           <el-date-picker
-            v-model="formLabelAlign.startDay"
+            v-model="formAddNewTask.startDay"
             type="date"
             placeholder="Chọn ngày"
           >
@@ -167,7 +176,7 @@
 
         <el-form-item label="Thời hạn hoàn thành">
           <el-date-picker
-            v-model="formLabelAlign.deadline"
+            v-model="formAddNewTask.deadline"
             type="date"
             placeholder="Chọn ngày"
           >
@@ -187,6 +196,85 @@
         Đóng
       </CButton>
       <CButton color="success" @click="addNewTask">Thêm mới công việc</CButton>
+    </CModalFooter>
+  </CModal>
+  <CModal
+    alignment="center"
+    :visible="modalUpdateTask"
+    @close="
+      () => {
+        modalUpdateTask = false
+      }
+    "
+  >
+    <CModalHeader>
+      <CModalTitle>Sửa đổi công việc</CModalTitle>
+    </CModalHeader>
+    <CModalBody>
+      <el-form
+        label-width="100px"
+        :model="formUpdateTask"
+        label-position="left"
+      >
+        <el-form-item label="Tên công việc">
+          <el-input v-model="formUpdateTask.name"></el-input>
+        </el-form-item>
+        <el-form-item label="Trạng thái">
+          <el-select v-model="formUpdateTask.status" placeholder="Select">
+            <el-option
+              v-for="item in status_option"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            >
+            </el-option>
+          </el-select>
+        </el-form-item>
+        <el-form-item label="Nội dung cụ thể">
+          <el-input
+            v-model="formUpdateTask.description"
+            type="textarea"
+            rows="5"
+          ></el-input>
+        </el-form-item>
+        <el-form-item label="Ngày bắt đầu">
+          <el-date-picker
+            v-model="formUpdateTask.startDay"
+            type="date"
+            placeholder="Chọn ngày"
+          >
+          </el-date-picker>
+        </el-form-item>
+
+        <el-form-item label="Thời hạn hoàn thành">
+          <el-date-picker
+            v-model="formUpdateTask.deadline"
+            type="date"
+            placeholder="Chọn ngày"
+          >
+          </el-date-picker>
+        </el-form-item>
+        <el-form-item label="Ghi chú">
+          <el-input
+            v-model="formUpdateTask.note"
+            type="textarea"
+            rows="5"
+          ></el-input>
+        </el-form-item>
+      </el-form>
+    </CModalBody>
+    <CModalFooter>
+      <CButton
+        color="secondary"
+        @click="
+          () => {
+            modalUpdateTask = false
+          }
+        "
+      >
+        Đóng
+      </CButton>
+      <CButton color="success" @click="addNewTask">Cập nhật công việc</CButton>
     </CModalFooter>
   </CModal>
 </template>
@@ -215,10 +303,26 @@ export default {
       ],
       visibleVerticallyCenteredDemo: false,
       modalAddNewTask: false,
+      modalUpdateTask: false,
       users: [],
       checkList: ['selected and disabled', 'Option A'],
       task_focus: 0,
-      formLabelAlign: { name: '', description: '', deadline: '', startDay: '' },
+      formAddNewTask: { name: '', description: '', deadline: '', startDay: '' },
+      formUpdateTask: {
+        name: '',
+        progress: 0,
+        status: '',
+        deadline: '',
+        startDay: '',
+        description: '',
+        note: '',
+      },
+      status_option: [
+        { value: 'done', label: 'Done' },
+        { value: 'cancel', label: 'Cancel' },
+        { value: 'pending', label: 'Pending' },
+        { value: 'doing', label: 'Doing' },
+      ],
     }
   },
   methods: {
@@ -274,12 +378,12 @@ export default {
     addNewTask() {
       const task_new = {
         id: faker.datatype.uuid(),
-        name: this.formLabelAlign.name,
+        name: this.formAddNewTask.name,
         progress: 0,
         assign: [],
         status: 'pending',
-        deadline: this.formLabelAlign.deadline,
-        startDay: this.formLabelAlign.startDay,
+        deadline: this.formAddNewTask.deadline,
+        startDay: this.formAddNewTask.startDay,
       }
       this.taskDetail.push(task_new)
     },
