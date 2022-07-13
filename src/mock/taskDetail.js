@@ -15,6 +15,8 @@ const TASK_DETAIL_MOCK = [
       },
     ],
     status: sample(['done', 'cancel', 'pending', 'doing']),
+    startDate: faker.date.past(),
+    deadline: faker.date.future(),
   },
   {
     id: faker.datatype.uuid(),
@@ -38,6 +40,8 @@ const TASK_DETAIL_MOCK = [
       },
     ],
     status: sample(['done', 'cancel', 'pending', 'doing']),
+    startDate: faker.date.past(),
+    deadline: faker.date.future(),
   },
   {
     id: faker.datatype.uuid(),
@@ -56,6 +60,8 @@ const TASK_DETAIL_MOCK = [
       },
     ],
     status: sample(['done', 'cancel', 'pending', 'doing']),
+    startDate: faker.date.past(),
+    deadline: faker.date.future(),
   },
   {
     id: faker.datatype.uuid(),
@@ -79,6 +85,8 @@ const TASK_DETAIL_MOCK = [
       },
     ],
     status: sample(['done', 'cancel', 'pending', 'doing']),
+    startDate: faker.date.past(),
+    deadline: faker.date.future(),
   },
   {
     id: faker.datatype.uuid(),
@@ -97,6 +105,8 @@ const TASK_DETAIL_MOCK = [
       },
     ],
     status: sample(['done', 'cancel', 'pending', 'doing']),
+    startDate: faker.date.past(),
+    deadline: faker.date.future(),
   },
 ]
 

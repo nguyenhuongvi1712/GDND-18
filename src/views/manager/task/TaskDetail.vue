@@ -34,7 +34,9 @@
               <el-button :icon="Plus" @click="increase(task.id)" size="small" />
             </el-button-group>
           </div>
-
+          <div class="task-info">
+            <p>Thời hạn: {{ formatDate(task.deadline) }}</p>
+          </div>
           <hr />
           <div class="assign-info">
             <p>Người làm ({{ task.assign.length }})</p>
@@ -73,8 +75,18 @@
               </el-tooltip>
             </div>
           </div>
+          <hr />
           <div>
-            <el-button class="view-btn" type="success">Update</el-button>
+            <el-button class="view-btn" type="success" size="small"
+              >Update</el-button
+            >
+            <el-button
+              class="view-btn"
+              type="danger"
+              size="small"
+              @click="handleOnDeleteTask(task_index)"
+              >Delete</el-button
+            >
           </div>
         </div>
       </el-card>
@@ -144,11 +156,20 @@
             rows="5"
           ></el-input>
         </el-form-item>
+        <el-form-item label="Ngày bắt đầu">
+          <el-date-picker
+            v-model="formLabelAlign.startDay"
+            type="date"
+            placeholder="Chọn ngày"
+          >
+          </el-date-picker>
+        </el-form-item>
+
         <el-form-item label="Thời hạn hoàn thành">
           <el-date-picker
             v-model="formLabelAlign.deadline"
             type="date"
-            placeholder="Pick a day"
+            placeholder="Chọn ngày"
           >
           </el-date-picker>
         </el-form-item>
@@ -197,7 +218,7 @@ export default {
       users: [],
       checkList: ['selected and disabled', 'Option A'],
       task_focus: 0,
-      formLabelAlign: { name: '', description: '', deadline: '' },
+      formLabelAlign: { name: '', description: '', deadline: '', startDay: '' },
     }
   },
   methods: {
@@ -257,13 +278,41 @@ export default {
         progress: 0,
         assign: [],
         status: 'pending',
+        deadline: this.formLabelAlign.deadline,
+        startDay: this.formLabelAlign.startDay,
       }
       this.taskDetail.push(task_new)
+    },
+    handleOnDeleteTask(task_index) {
+      this.$confirm(
+        'Hành động này sẽ xóa công việc này vĩnh viễn. Tiếp tục?',
+        'Cảnh báo',
+        {
+          confirmButtonText: 'OK',
+          cancelButtonText: 'Hủy',
+          type: 'warning',
+        },
+      )
+        .then(() => {
+          this.taskDetail.splice(task_index, 1)
+          this.$message({
+            type: 'success',
+            message: 'Xóa thành công',
+          })
+        })
+        .catch(() => {})
+    },
+    formatDate(deadline) {
+      var date = new Date(deadline)
+      return (
+        date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear()
+      )
     },
   },
   created() {
     this.taskList = taskListMock
     this.taskDetail = taskDetailMock
+    // console.log('task detail', this.taskDetail)
     const user_map = userMock.slice(0, 9)
     this.users = user_map.map((e) => {
       return {
@@ -342,5 +391,10 @@ export default {
 h1 {
   text-align: center;
   margin-bottom: 30px;
+}
+.task-info {
+  text-align: left;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 </style>

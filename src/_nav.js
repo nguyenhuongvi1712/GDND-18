@@ -62,11 +62,11 @@ export default [
         name: 'Danh sách công việc',
         to: '/manager/task/list',
       },
-      {
-        component: 'CNavItem',
-        name: 'Thêm mới công việc',
-        to: '/manager/task/create',
-      },
+      // {
+      //   component: 'CNavItem',
+      //   name: 'Thêm mới công việc',
+      //   to: '/manager/task/create',
+      // },
     ],
   },
   {
