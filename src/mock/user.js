@@ -23,6 +23,7 @@ const users = [...Array(50)].map((_, index) => ({
     'Full Stack Developer',
   ]),
   avatar: faker.image.avatar(),
+  manHour: Math.floor(Math.random() * 100) + 35,
 }))
 
 export default users

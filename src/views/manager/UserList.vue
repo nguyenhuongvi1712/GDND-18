@@ -12,12 +12,15 @@
         <div class="detail-info">
           <p class="detail-name">{{ user.name }}</p>
           <el-tag v-if="user.status === 'active'" type="success"
-            >Đang hoạt động</el-tag
+            >Đang làm việc</el-tag
           >
-          <el-tag v-else type="danger">Không hoạt động</el-tag>
+          <el-tag v-else type="danger">Đang nghỉ làm</el-tag>
           <hr />
+          <p>Giờ công hiện tại: {{ user.manHour }}</p>
           <div>
-            <el-button class="view-btn" type="success">Xem thêm</el-button>
+            <el-button class="view-btn" type="success" @click="onHandleRedirect"
+              >Xem thêm</el-button
+            >
           </div>
         </div>
       </el-card>
@@ -105,6 +108,9 @@ export default {
     handleOnChangePage(currentPage) {
       var page_form = (currentPage - 1) * this.limit
       this.data_render = this.users.slice(page_form, page_form + this.limit)
+    },
+    onHandleRedirect() {
+      this.$router.push('/manager/users-detail')
     },
   },
   mounted() {

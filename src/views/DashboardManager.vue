@@ -285,13 +285,13 @@ export default {
   },
   setup() {
     const progressGroupExample1 = [
-      { title: 'Monday', value1: 34, value2: 78, value3: 10, value4: 10 },
-      { title: 'Tuesday', value1: 56, value2: 94 },
-      { title: 'Wednesday', value1: 12, value2: 67 },
-      { title: 'Thursday', value1: 43, value2: 91 },
-      { title: 'Friday', value1: 22, value2: 73 },
-      { title: 'Saturday', value1: 53, value2: 82 },
-      { title: 'Sunday', value1: 9, value2: 69 },
+      { title: 'Thứ 2', value1: 34, value2: 78, value3: 10, value4: 10 },
+      { title: 'Thứ 3', value1: 56, value2: 94 },
+      { title: 'Thứ 4', value1: 12, value2: 67 },
+      { title: 'Thứ 5', value1: 43, value2: 91 },
+      { title: 'Thứ 6', value1: 22, value2: 73 },
+      { title: 'Thứ 7', value1: 53, value2: 82 },
+      { title: 'Chủ nhật', value1: 9, value2: 69 },
     ]
     const progressGroupExample2 = [
       { title: 'Male', icon: 'cil-user', value: 53 },

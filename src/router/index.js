@@ -27,6 +27,11 @@ const routes = [
         redirect: '/manager/users',
       },
       {
+        path: '/manager/users-detail',
+        name: 'Nhân viên',
+        component: () => import('@/views/manager/UserDetail.vue'),
+      },
+      {
         path: '/manager/users',
         name: 'Danh sách nhân viên',
         component: () => import('@/views/manager/UserList.vue'),
