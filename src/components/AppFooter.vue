@@ -1,5 +1,5 @@
 <template>
-  <CFooter> LTCT - SP4 </CFooter>
+  <CFooter> HI_18 </CFooter>
 </template>
 
 <script>
