@@ -56,6 +56,11 @@ const routes = [
         component: () => import('@/views/accountant/WorkDayTracking.vue'),
       },
       {
+        path: '/accountant/salary/upload',
+        name: 'Upload bảng lương',
+        component: () => import('@/views/accountant/salary/Upload.vue'),
+      },
+      {
         path: '/accountant/salary/staff',
         name: 'Lương nhân viên',
         component: () => import('@/views/accountant/salary/Staff.vue'),

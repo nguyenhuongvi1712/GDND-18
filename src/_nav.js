@@ -67,6 +67,11 @@ export default [
     items: [
       {
         component: 'CNavItem',
+        name: 'Upload bảng lương',
+        to: '/accountant/salary/upload',
+      },
+      {
+        component: 'CNavItem',
         name: 'Lương nhân viên',
         to: '/accountant/salary/staff',
       },
