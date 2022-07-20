@@ -78,7 +78,7 @@ export default [
       {
         component: 'CNavItem',
         name: 'Danh sách KPI',
-        to: '/users/customers',
+        to: '/manager/kpi',
       },
       // {
       //   component: 'CNavItem',

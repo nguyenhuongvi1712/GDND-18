@@ -32,6 +32,11 @@ const routes = [
         component: () => import('@/views/manager/UserList.vue'),
       },
       {
+        path: '/manager/kpi',
+        name: 'Quản lý KPI',
+        component: () => import('@/views/manager/KPI.vue'),
+      },
+      {
         path: '/manager/task/list',
         name: 'Danh sách công việc',
         component: () => import('@/views/manager/task/TaskList.vue'),

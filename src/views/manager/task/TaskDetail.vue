@@ -81,12 +81,7 @@
               class="view-btn"
               type="success"
               size="small"
-              @click="
-                () => {
-                  modalUpdateTask = true
-                  task_focus = task_index
-                }
-              "
+              @click="handleEdit(task_index, task)"
               >Update</el-button
             >
             <el-button
@@ -220,15 +215,14 @@
           <el-input v-model="formUpdateTask.name"></el-input>
         </el-form-item>
         <el-form-item label="Trạng thái">
-          <el-select v-model="formUpdateTask.status" placeholder="Select">
-            <el-option
+          <el-radio-group v-model="formUpdateTask.status">
+            <el-radio
               v-for="item in status_option"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"
+              :label="item.value"
+              :key="item"
+              >{{ item.label }}</el-radio
             >
-            </el-option>
-          </el-select>
+          </el-radio-group>
         </el-form-item>
         <el-form-item label="Nội dung cụ thể">
           <el-input
@@ -242,6 +236,7 @@
             v-model="formUpdateTask.startDay"
             type="date"
             placeholder="Chọn ngày"
+            :default-value="formUpdateTask.startDay"
           >
           </el-date-picker>
         </el-form-item>
@@ -251,7 +246,9 @@
             v-model="formUpdateTask.deadline"
             type="date"
             placeholder="Chọn ngày"
+            default-value="2010-10-01"
           >
+            >
           </el-date-picker>
         </el-form-item>
         <el-form-item label="Ghi chú">
@@ -274,7 +271,7 @@
       >
         Đóng
       </CButton>
-      <CButton color="success" @click="addNewTask">Cập nhật công việc</CButton>
+      <CButton color="success" @click="updateTask">Cập nhật công việc</CButton>
     </CModalFooter>
   </CModal>
 </template>
@@ -411,6 +408,47 @@ export default {
       return (
         date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear()
       )
+    },
+    handleEdit(index, row) {
+      this.modalUpdateTask = true
+      this.focusTask = { ...row, index }
+      this.formUpdateTask.name = this.focusTask.name
+      this.formUpdateTask.description = this.focusTask.description
+      this.formUpdateTask.status = this.focusTask.status
+      this.formUpdateTask.note = this.focusTask.note
+      this.formAddNewTask.startDay = new Date(this.focusTask.startDay)
+      this.formAddNewTask.deadline = new Date(this.focusTask.deadline)
+      console.log(this.formAddNewTask)
+    },
+    updateTask() {
+      const index = this.taskDetail.findIndex((e) => e.id === this.focusTask.id)
+      if (index) {
+        this.taskDetail[index].name = this.formUpdateTask.name
+        this.taskDetail[index].status = this.formUpdateTask.status
+        this.taskDetail[index].description = this.formUpdateTask.description
+        this.taskDetail[index].note = this.formUpdateTask.note
+        this.taskDetail[index].startDay = this.formAddNewTask.startDay
+        this.taskDetail[index].deadline = this.formAddNewTask.deadline
+
+        if (this.taskDetail[index].status === 'done')
+          this.taskDetail[index].progress = 100
+        this.formUpdateTask = {
+          name: '',
+          progress: 0,
+          status: '',
+          deadline: '',
+          startDay: '',
+          description: '',
+          note: '',
+        }
+
+        this.focusTask = []
+        this.$message({
+          message: 'Cập nhật thành công!',
+          type: 'success',
+        })
+        this.modalUpdateTask = false
+      }
     },
   },
   created() {

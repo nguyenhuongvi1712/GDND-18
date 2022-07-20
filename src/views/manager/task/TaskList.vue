@@ -4,7 +4,16 @@
     <span class="uppercase-text">{{ account.team }}</span>
   </h1>
 
-  <el-table :data="tableData" stripe style="width: 100%">
+  <el-table
+    :data="
+      tableData.filter(
+        (data) =>
+          !search || data.name.toLowerCase().includes(search.toLowerCase()),
+      )
+    "
+    stripe
+    style="width: 100%"
+  >
     <el-table-column prop="name" label="Nội dung công việc" width="500">
       <template v-slot="scope">
         <a class="link-custom" @click="onHandleRedirect(scope.row.id)">{{
@@ -16,7 +25,13 @@
     </el-table-column>
     <el-table-column prop="numOfMember" label="Số lượng nhân công" sortable>
     </el-table-column>
-    <el-table-column prop="deadline" label="Thời hạn"> </el-table-column>
+    <el-table-column label="Thời hạn">
+      <template v-slot="scope">
+        <span style="margin-left: 10px">{{
+          formatDate(scope.row.deadline)
+        }}</span>
+      </template>
+    </el-table-column>
     <el-table-column
       prop="status"
       label="Trạng thái"
@@ -38,7 +53,15 @@
         >
       </template>
     </el-table-column>
-    <el-table-column label="Operations">
+    <el-table-column>
+      <template v-slot:header="scope">
+        <el-input
+          v-model="search"
+          size="mini"
+          placeholder="Type to search"
+          :scope="scope"
+        />
+      </template>
       <template v-slot="scope">
         <el-button size="mini" @click="handleEdit(scope.$index, scope.row)"
           >Cập nhật</el-button
@@ -56,6 +79,93 @@
     >
     </el-pagination>
   </div>
+  <CModal
+    alignment="center"
+    :visible="modalUpdateTask"
+    @close="
+      () => {
+        modalUpdateTask = false
+      }
+    "
+  >
+    <CModalHeader>
+      <CModalTitle>Cập nhật báo cáo công việc</CModalTitle>
+    </CModalHeader>
+    <CModalBody>
+      <el-form
+        label-width="100px"
+        :model="formUpdateTask"
+        label-position="left"
+      >
+        <el-form-item label="Tên công việc">
+          <p>{{ focusTask.name }}</p>
+        </el-form-item>
+        <el-form-item label="Tiến độ">
+          <el-input-number
+            v-model="formUpdateTask.progress"
+            controls-position="right"
+            @change="handleChange"
+            :min="0"
+            :max="100"
+            step="10"
+          ></el-input-number>
+        </el-form-item>
+        <el-form-item label="Trạng thái">
+          <el-radio-group v-model="formUpdateTask.status">
+            <el-radio
+              v-for="item in status_option"
+              :label="item.value"
+              :key="item"
+              >{{ item.label }}</el-radio
+            >
+          </el-radio-group>
+        </el-form-item>
+        <el-form-item label="Nội dung cụ thể">
+          <p>{{ focusTask?.description }}</p>
+        </el-form-item>
+        <el-form-item label="Ngày bắt đầu">
+          <p>{{ formatDate(focusTask?.start) }}</p>
+        </el-form-item>
+
+        <el-form-item label="Thời hạn hoàn thành">
+          <p>{{ formatDate(focusTask?.deadline) }}</p>
+        </el-form-item>
+        <el-form-item
+          label="Hình ảnh mô tả"
+          v-if="focusTask.images && focusTask.images.length !== 0"
+        >
+          <p v-for="(img, index) in focusTask.images" :key="index">
+            <el-image
+              style="width: 100px; height: 100px"
+              :src="img"
+              fit="fill"
+              :preview-src-list="focusTask.images"
+            ></el-image>
+          </p>
+        </el-form-item>
+        <el-form-item label="Ghi chú báo cáo">
+          <el-input
+            v-model="formUpdateTask.note"
+            type="textarea"
+            rows="5"
+          ></el-input>
+        </el-form-item>
+      </el-form>
+    </CModalBody>
+    <CModalFooter>
+      <CButton
+        color="secondary"
+        @click="
+          () => {
+            modalUpdateTask = false
+          }
+        "
+      >
+        Đóng
+      </CButton>
+      <CButton color="success" @click="updateTask">Cập nhật công việc</CButton>
+    </CModalFooter>
+  </CModal>
 </template>
 <script>
 import taskListMock from '../../../mock/task'
@@ -66,6 +176,20 @@ export default {
       tableData: [],
       taskList: [],
       limit: 10,
+      search: '',
+      modalUpdateTask: false,
+      status_option: [
+        { value: 'done', label: 'Done' },
+        { value: 'cancel', label: 'Cancel' },
+        { value: 'pending', label: 'Pending' },
+        { value: 'doing', label: 'Doing' },
+      ],
+      focusTask: [],
+      formUpdateTask: {
+        progress: 0,
+        status: '',
+        note: '',
+      },
     }
   },
   created() {
@@ -95,6 +219,40 @@ export default {
     },
     onHandleRedirect(id) {
       this.$router.push(`/manager/task/${id}`)
+    },
+    formatDate(deadline) {
+      var date = new Date(deadline)
+      return date.getDate() + '/' + date.getMonth() + '/' + date.getFullYear()
+    },
+    handleEdit(index, row) {
+      this.modalUpdateTask = true
+      this.focusTask = { ...row, index }
+      this.formUpdateTask.progress = this.focusTask.progress
+      this.formUpdateTask.status = this.focusTask.status
+      this.formUpdateTask.note = this.focusTask.note
+      console.log(index, row)
+    },
+    updateTask() {
+      console.log('>>>')
+      const index = this.tableData.findIndex((e) => e.id === this.focusTask.id)
+      if (index) {
+        this.tableData[index].progress = this.formUpdateTask.progress
+        this.tableData[index].status = this.formUpdateTask.status
+        this.tableData[index].note = this.formUpdateTask.note
+
+        this.formUpdateTask = {
+          progress: 0,
+          status: '',
+          note: '',
+        }
+
+        this.focusTask = []
+        this.$message({
+          message: 'Cập nhật thành công!',
+          type: 'success',
+        })
+      }
+      this.modalUpdateTask = false
     },
   },
 }

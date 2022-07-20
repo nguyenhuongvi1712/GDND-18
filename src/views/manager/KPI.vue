@@ -1,42 +1,5 @@
 <template>
   <div>
-    <!-- <WidgetsStatsA /> -->
-    <!-- <CRow>
-      <CCol :md="12">
-        <CCard class="mb-4">
-          <CCardBody>
-            <CRow>
-              <CCol :sm="5">
-                <h4 id="traffic" class="card-title mb-0">Traffic</h4>
-                <div class="small text-medium-emphasis">January 2021</div>
-              </CCol>
-              <CCol :sm="7" class="d-none d-md-block">
-                <CButton color="primary" class="float-end">
-                  <CIcon icon="cil-cloud-download" />
-                </CButton>
-                <CButtonGroup
-                  class="float-end me-3"
-                  role="group"
-                  aria-label="Basic outlined example"
-                >
-                  <CButton color="secondary" variant="outline">Day</CButton>
-                  <CButton color="secondary" variant="outline" active
-                    >Month</CButton
-                  >
-                  <CButton color="secondary" variant="outline">Year</CButton>
-                </CButtonGroup>
-              </CCol>
-            </CRow>
-            <CRow>
-              <MainChartExample
-                style="height: 300px; max-height: 300px; margin-top: 40px"
-              />
-            </CRow>
-          </CCardBody>
-        </CCard>
-      </CCol>
-    </CRow> -->
-    <!-- <WidgetsStatsD /> -->
     <CRow>
       <CCol :md="12">
         <CCard class="mb-4">
@@ -144,121 +107,56 @@
                   </CCol>
                 </CRow>
                 <hr class="mt-0" />
-                <!-- <div
-                  v-for="item in progressGroupExample2"
-                  :key="item.title"
-                  class="progress-group"
-                >
-                  <div class="progress-group-header">
-                    <CIcon :icon="item.icon" class="me-2" size="lg" />
-                    <span class="title">{{ item.title }}</span>
-                    <span class="ms-auto fw-semibold">{{ item.value }}%</span>
-                  </div>
-                  <div class="progress-group-bars">
-                    <CProgress thin :value="item.value" color="warning" />
-                  </div>
-                </div> -->
-
                 <div class="mb-5"></div>
                 <CRow>
                   <CChartPieExampleVue />
                 </CRow>
-                <!-- <div
-                  v-for="item in progressGroupExample3"
-                  :key="item.title"
-                  class="progress-group"
-                >
-                  <div class="progress-group-header">
-                    <CIcon :icon="item.icon" class="me-2" size="lg" />
-                    <span class="title">Organic Search</span>
-                    <span class="ms-auto fw-semibold">
-                      {{ item.value }}
-                      <span class="text-medium-emphasis small"
-                        >({{ item.percent }}%)</span
-                      >
-                    </span>
-                  </div>
-                  <div class="progress-group-bars">
-                    <CProgress thin :value="item.percent" color="success" />
-                  </div>
-                </div> -->
               </CCol>
             </CRow>
             <br />
-            <CTable align="middle" class="mb-0 border" hover responsive>
-              <CTableHead color="light">
-                <CTableRow>
-                  <CTableHeaderCell class="text-center">
-                    <CIcon name="cil-people" />
-                  </CTableHeaderCell>
-                  <CTableHeaderCell>Nhân công</CTableHeaderCell>
-                  <!-- <CTableHeaderCell class="text-center"
-                    >Country</CTableHeaderCell
-                  > -->
-                  <CTableHeaderCell>Năng suất công việc</CTableHeaderCell>
-                  <!-- <CTableHeaderCell class="text-center"
-                    >Payment Method</CTableHeaderCell
-                  > -->
-                  <CTableHeaderCell>Công việc</CTableHeaderCell>
-                </CTableRow>
-              </CTableHead>
-              <CTableBody>
-                <CTableRow v-for="item in tableExample" :key="item.name">
-                  <CTableDataCell class="text-center">
-                    <CAvatar
-                      size="md"
-                      :src="item.avatar.src"
-                      :status="item.avatar.status"
-                    />
-                  </CTableDataCell>
-                  <CTableDataCell>
-                    <div>{{ item.user.name }}</div>
-                    <div class="small text-medium-emphasis">
-                      <span>{{ item.user.new ? 'New' : 'Recurring' }}</span> |
-                      {{ item.user.registered }}
-                    </div>
-                  </CTableDataCell>
-                  <!-- <CTableDataCell class="text-center">
-                    <CIcon
-                      size="xl"
-                      :name="item.country.flag"
-                      :title="item.country.name"
-                    />
-                  </CTableDataCell> -->
-                  <CTableDataCell>
-                    <div class="clearfix">
-                      <div class="float-start">
-                        <strong>{{ item.usage.value }}%</strong>
-                      </div>
-                      <div class="float-end">
-                        <small class="text-medium-emphasis">
-                          {{ item.usage.period }}
-                        </small>
-                      </div>
-                    </div>
-                    <CProgress
-                      thin
-                      :color="item.usage.color"
-                      :value="item.usage.value"
-                    />
-                  </CTableDataCell>
-                  <!-- <CTableDataCell class="text-center">
-                    <CIcon size="xl" :name="item.payment.icon" />
-                  </CTableDataCell> -->
-                  <CTableDataCell>
-                    <div class="small text-medium-emphasis">
-                      Thời gian checkout
-                    </div>
-                    <strong>{{ item.activity }}</strong>
-                  </CTableDataCell>
-                </CTableRow>
-                <CTableRow> </CTableRow>
-              </CTableBody>
-            </CTable>
           </CCardBody>
         </CCard>
       </CCol>
     </CRow>
+    <CCard>
+      <CCardHeader> KPI Nhân công </CCardHeader>
+      <CCardBody>
+        <el-table :data="dataTableKPIUser" style="width: 100%">
+          <el-table-column prop="name" label="Tên" width="180">
+          </el-table-column>
+          <el-table-column prop="avatar" label="Ảnh" width="100">
+            <template v-slot="scope">
+              <el-avatar shape="square" :src="scope.row.avatar"></el-avatar>
+            </template>
+          </el-table-column>
+          <el-table-column
+            prop="numOfAllTask"
+            label="Tổng số công việc"
+            width="180"
+            sortable=""
+          >
+          </el-table-column>
+          <el-table-column
+            prop="numOfDoneTask"
+            label="Số công việc đã hoàn thành"
+            sortable=""
+          >
+          </el-table-column>
+          <el-table-column prop="manHour" label="Số giờ công" sortable="">
+          </el-table-column>
+        </el-table>
+        <div class="pagination-custom">
+          <el-pagination
+            background
+            layout="prev, pager, next"
+            :total="kpiUser.length"
+            :page-size="10"
+            @current-change="handleOnChangePage"
+          >
+          </el-pagination>
+        </div>
+      </CCardBody>
+    </CCard>
   </div>
 </template>
 
@@ -269,19 +167,19 @@ import avatar3 from '@/assets/images/avatars/3.jpg'
 import avatar4 from '@/assets/images/avatars/4.jpg'
 import avatar5 from '@/assets/images/avatars/5.jpg'
 import avatar6 from '@/assets/images/avatars/6.jpg'
-// import MainChartExample from './charts/MainChartExample'
-import CChartPieExampleVue from './charts/CChartPieExample.vue'
-// import WidgetsStatsA from './widgets/WidgetsStatsTypeA.vue'
-// import WidgetsStatsD from './widgets/WidgetsStatsTypeD.vue'
+import CChartPieExampleVue from '../charts/CChartPieExample.vue'
+import kpiUsers from '../../mock/kpi-user'
 
 export default {
   name: 'Dashboard',
   components: {
-    // MainChartExample,
     CChartPieExampleVue,
-
-    // WidgetsStatsA,
-    // WidgetsStatsD,
+  },
+  data() {
+    return {
+      kpiUser: kpiUsers,
+      dataTableKPIUser: [],
+    }
   },
   setup() {
     const progressGroupExample1 = [
@@ -406,5 +304,90 @@ export default {
       progressGroupExample3,
     }
   },
+  methods: {
+    handleOnChangePage(currentPage) {
+      var page_form = (currentPage - 1) * 10
+      this.dataTableKPIUser = this.kpiUser.slice(page_form, page_form + 10)
+    },
+  },
+  created() {
+    this.dataTableKPIUser = this.kpiUser.slice(0, 10)
+  },
 }
 </script>
+
+<style scope>
+.time {
+  font-size: 13px;
+  color: #999;
+}
+
+.bottom {
+  margin-top: 13px;
+  line-height: 12px;
+}
+
+.button {
+  padding: 0;
+  float: right;
+}
+
+.image {
+  width: 100%;
+  display: block;
+}
+
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: '';
+}
+
+.clearfix:after {
+  clear: both;
+}
+.detail-info {
+  text-align: center;
+}
+.detail-name {
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+  padding: 10px;
+}
+.view-btn {
+  padding: 10px 15px;
+}
+.card-container {
+  padding: 10px;
+  text-align: center;
+}
+.el-col {
+  margin-bottom: 15px;
+}
+.uppercase-text {
+  text-transform: uppercase;
+}
+.assign-info {
+  text-align: left;
+}
+.avar_block {
+  position: relative;
+  display: inline;
+  margin-right: 20px;
+}
+.avar_close {
+  position: absolute;
+  right: -12px;
+  padding: 5px !important;
+}
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+.task-info {
+  text-align: left;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+</style>
